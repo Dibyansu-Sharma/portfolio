@@ -22,6 +22,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
+import Contact from "@/components/ui/contact";
 
 export default function Portfolio() {
   const [activeSection, setActiveSection] = useState("about");
@@ -135,50 +136,7 @@ export default function Portfolio() {
           </>
         )}
 
-        {activeSection === "contact" && (
-          <section className="max-w-md mx-auto">
-            <h3 className="text-2xl font-semibold mb-4">Contact Me</h3>
-            <Card>
-              <CardContent className="pt-6">
-                <form className="space-y-4">
-                  <div className="space-y-2">
-                    <label htmlFor="name" className="text-sm font-medium">
-                      Name
-                    </label>
-                    <input
-                      id="name"
-                      className="w-full p-2 border rounded-md"
-                      placeholder="Your Name"
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <label htmlFor="email" className="text-sm font-medium">
-                      Email
-                    </label>
-                    <input
-                      id="email"
-                      type="email"
-                      className="w-full p-2 border rounded-md"
-                      placeholder="your@email.com"
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <label htmlFor="message" className="text-sm font-medium">
-                      Message
-                    </label>
-                    <textarea
-                      id="message"
-                      rows={4}
-                      className="w-full p-2 border rounded-md"
-                      placeholder="Your message..."
-                    />
-                  </div>
-                  <Button className="w-full">Send Message</Button>
-                </form>
-              </CardContent>
-            </Card>
-          </section>
-        )}
+        {activeSection === "contact" && (<Contact/>)}
       </main>
 
       <footer className="bg-muted mt-12 py-6 text-center">
