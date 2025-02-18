@@ -45,34 +45,64 @@ export default function Portfolio() {
   return (
     <div className="min-h-screen bg-background flex flex-col">
       {/* Header */}
-      <header className="p-4 flex justify-between items-center">
+      <header className="p-4 flex items-center justify-between w-full">
         {/* Theme Toggle */}
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="outline" size="icon">
-              {resolvedTheme === "dark" ? <Moon className="h-5 w-5" /> : <Sun className="h-5 w-5" />}
+              {resolvedTheme === "dark" ? (
+                <Moon className="h-5 w-5" />
+              ) : (
+                <Sun className="h-5 w-5" />
+              )}
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
-            <DropdownMenuItem onClick={() => setTheme("light")}>Light</DropdownMenuItem>
-            <DropdownMenuItem onClick={() => setTheme("dark")}>Dark</DropdownMenuItem>
-            <DropdownMenuItem onClick={() => setTheme("system")}>System</DropdownMenuItem>
+            <DropdownMenuItem onClick={() => setTheme("light")}>
+              Light
+            </DropdownMenuItem>
+            <DropdownMenuItem onClick={() => setTheme("dark")}>
+              Dark
+            </DropdownMenuItem>
+            <DropdownMenuItem onClick={() => setTheme("system")}>
+              System
+            </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
 
-        {/* Navigation */}
-        <nav>
+        {/* Desktop Navigation (Hidden on Small Screens) */}
+        <nav className="hidden md:flex space-x-4">
           {["about", "resume", "projects", "contact"].map((section) => (
             <Button
               key={section}
               variant={activeSection === section ? "default" : "ghost"}
-              className="mr-2"
               onClick={() => setActiveSection(section)}
             >
               {section.charAt(0).toUpperCase() + section.slice(1)}
             </Button>
           ))}
         </nav>
+
+        {/* Mobile Menu (Visible Only on Small Screens) */}
+        <div className="md:hidden">
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="outline" size="icon">
+                ☰ {/* Mobile menu icon */}
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+              {["about", "resume", "projects", "contact"].map((section) => (
+                <DropdownMenuItem
+                  key={section}
+                  onClick={() => setActiveSection(section)}
+                >
+                  {section.charAt(0).toUpperCase() + section.slice(1)}
+                </DropdownMenuItem>
+              ))}
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </div>
       </header>
 
       {/* Page Content */}
@@ -89,25 +119,52 @@ export default function Portfolio() {
             >
               {/* Profile Picture */}
               <Avatar className="w-32 h-32 mx-auto mb-4">
-                <Image src="/profile.jpeg" width={128} height={128} alt="Dibyansu" unoptimized />
+                <Image
+                  src="/profile.jpeg"
+                  width={128}
+                  height={128}
+                  alt="Dibyansu"
+                  unoptimized
+                />
               </Avatar>
 
               {/* Name & Role */}
               <h2 className="text-3xl font-bold mb-2">Dibyansu Sharma</h2>
-              <p className="text-xl text-muted-foreground mb-4">Full Stack Developer</p>
+              <p className="text-xl text-muted-foreground mb-4">
+                Full Stack Developer
+              </p>
 
               {/* Professional Bio */}
               <p className="max-w-2xl mx-auto text-muted-foreground leading-relaxed">
-                A <strong>Full-Stack Software Developer</strong> with <strong>1.7 years of experience </strong> 
-                in web development, specializing in the <strong>MERN stack, API development, SDK implementation, and blockchain</strong>. 
-                I have hands-on experience with <strong>AWS and Docker</strong> and have successfully 
-                delivered <strong>10 platform releases</strong> and <strong>8 microservices</strong> across <strong>4 blockchain networks</strong>. 
-                Passionate about building scalable and efficient applications, I thrive on solving complex problems and continuously exploring new technologies.
+                A <strong>Full-Stack Software Developer</strong> with{" "}
+                <strong>1.7 years of experience </strong>
+                in web development, specializing in the{" "}
+                <strong>
+                  MERN stack, API development, SDK implementation, and
+                  blockchain
+                </strong>
+                . I have hands-on experience with{" "}
+                <strong>AWS and Docker</strong> and have successfully delivered{" "}
+                <strong>10 platform releases</strong> and{" "}
+                <strong>8 microservices</strong> across{" "}
+                <strong>4 blockchain networks</strong>. Passionate about
+                building scalable and efficient applications, I thrive on
+                solving complex problems and continuously exploring new
+                technologies.
               </p>
 
               {/* Tech Stack */}
               <div className="flex flex-wrap justify-center gap-3 mt-6 mb-6">
-                {["JavaScript", "TypeScript", "React", "Next.js", "Node.js", "MongoDB", "Solidity", "AWS"].map((tech) => (
+                {[
+                  "JavaScript",
+                  "TypeScript",
+                  "React",
+                  "Next.js",
+                  "Node.js",
+                  "MongoDB",
+                  "Solidity",
+                  "AWS",
+                ].map((tech) => (
                   <span
                     key={tech}
                     className="px-3 py-1 text-white bg-black dark:bg-muted rounded-md text-sm font-medium"
@@ -119,19 +176,34 @@ export default function Portfolio() {
 
               {/* Social Links */}
               <div className="flex justify-center gap-6 mb-6">
-                <a href="https://github.com/Dibyansu-Sharma" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:underline">
+                <a
+                  href="https://github.com/Dibyansu-Sharma"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 hover:underline"
+                >
                   <Github className="w-5 h-5" /> GitHub
                 </a>
-                <a href="https://www.linkedin.com/in/dibyansu-sharma" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:underline">
+                <a
+                  href="https://www.linkedin.com/in/dibyansu-sharma"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 hover:underline"
+                >
                   <Linkedin className="w-5 h-5" /> LinkedIn
                 </a>
-                <a href="mailto:dibyansusharma1501@gmail.com" className="flex items-center gap-2 hover:underline">
+                <a
+                  href="mailto:dibyansusharma1501@gmail.com"
+                  className="flex items-center gap-2 hover:underline"
+                >
                   <Mail className="w-5 h-5" /> Email
                 </a>
               </div>
 
               {/* CTA Button */}
-              <Button onClick={() => setActiveSection("resume")}>View Resume</Button>
+              <Button onClick={() => setActiveSection("resume")}>
+                View Resume
+              </Button>
             </motion.section>
           )}
 
@@ -161,13 +233,21 @@ export default function Portfolio() {
                   <Card key={project}>
                     <CardHeader>
                       <CardTitle>Project {project}</CardTitle>
-                      <CardDescription>A brief description of the project</CardDescription>
+                      <CardDescription>
+                        A brief description of the project
+                      </CardDescription>
                     </CardHeader>
                     <CardContent>
-                      <img src={`/placeholder.svg?height=200&width=400&text=Project+${project}`} alt={`Project ${project}`} className="w-full h-40 object-cover rounded-md" />
+                      <img
+                        src={`/placeholder.svg?height=200&width=400&text=Project+${project}`}
+                        alt={`Project ${project}`}
+                        className="w-full h-40 object-cover rounded-md"
+                      />
                     </CardContent>
                     <CardFooter>
-                      <Button variant="outline" className="w-full">View Project</Button>
+                      <Button variant="outline" className="w-full">
+                        View Project
+                      </Button>
                     </CardFooter>
                   </Card>
                 ))}
@@ -176,7 +256,13 @@ export default function Portfolio() {
           )}
 
           {activeSection === "contact" && (
-            <motion.section key="contact" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} transition={{ duration: 0.4 }}>
+            <motion.section
+              key="contact"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.4 }}
+            >
               <Contact />
             </motion.section>
           )}
