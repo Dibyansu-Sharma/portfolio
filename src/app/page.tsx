@@ -1,100 +1,134 @@
-import Image from "next/image";
+"use client"
+import { useState } from "react";
+import Image from 'next/image'
+import { Avatar } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import ResumeComponent from "@/components/ui/resume";
+import Footer from "@/components/ui/footer";
 
-export default function Home() {
+export default function Portfolio() {
+  const [activeSection, setActiveSection] = useState("about");
+
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+    <div className="min-h-screen bg-background flex flex-col">
+      <header className="p-4 flex justify-between items-center">
+        <h1 className="text-2xl font-bold">Dibyansu Sharma</h1>
+        <nav>
+          <Button 
+            variant={activeSection === "about" ? "default" : "ghost"} 
+            className="mr-2"
+            onClick={() => setActiveSection("about")}
+          >
+            About
+          </Button>
+          <Button 
+            variant={activeSection === "resume" ? "default" : "ghost"} 
+            className="mr-2"
+            onClick={() => setActiveSection("resume")}
+          >
+            Resume
+          </Button>
+          <Button 
+            variant={activeSection === "projects" ? "default" : "ghost"} 
+            className="mr-2"
+            onClick={() => setActiveSection("projects")}
+          >
+            Projects
+          </Button>
+          <Button 
+            variant={activeSection === "contact" ? "default" : "ghost"}
+            onClick={() => setActiveSection("contact")}
+          >
+            Contact
+          </Button>
+        </nav>
+      </header>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
+      <main className="flex-grow container mx-auto px-4 py-8">
+        {activeSection === "about" && (
+          <section className="mb-12 text-center">
+            <Avatar className="w-32 h-32 mx-auto mb-4">
+              <Image src="/profile.jpeg" width={128} height={128} alt="Dibyansu"/>
+            </Avatar>
+            <h2 className="text-3xl font-bold mb-2">Dibyansu Sharma</h2>
+            <p className="text-xl text-muted-foreground mb-4">Full Stack Developer</p>
+            <Button onClick={() => setActiveSection("resume")}>View Resume</Button>
+          </section>
+        )}
+
+        {activeSection === "resume" && <ResumeComponent />}
+
+        {activeSection === "projects" && (
+          <>
+            <h3 className="text-2xl font-semibold mb-4">Projects</h3>
+            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+              {[1, 2, 3].map((project) => (
+                <Card key={project}>
+                  <CardHeader>
+                    <CardTitle>Project {project}</CardTitle>
+                    <CardDescription>A brief description of the project</CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <img
+                      src={`/placeholder.svg?height=200&width=400&text=Project+${project}`}
+                      alt={`Project ${project}`}
+                      className="w-full h-40 object-cover rounded-md"
+                    />
+                  </CardContent>
+                  <CardFooter>
+                    <Button variant="outline" className="w-full">
+                      View Project
+                    </Button>
+                  </CardFooter>
+                </Card>
+              ))}
+            </div>
+          </>
+        )}
+
+        {activeSection === "contact" && (
+          <section className="max-w-md mx-auto">
+            <h3 className="text-2xl font-semibold mb-4">Contact Me</h3>
+            <Card>
+              <CardContent className="pt-6">
+                <form className="space-y-4">
+                  <div className="space-y-2">
+                    <label htmlFor="name" className="text-sm font-medium">Name</label>
+                    <input
+                      id="name"
+                      className="w-full p-2 border rounded-md"
+                      placeholder="Your Name"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <label htmlFor="email" className="text-sm font-medium">Email</label>
+                    <input
+                      id="email"
+                      type="email"
+                      className="w-full p-2 border rounded-md"
+                      placeholder="your@email.com"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <label htmlFor="message" className="text-sm font-medium">Message</label>
+                    <textarea
+                      id="message"
+                      rows={4}
+                      className="w-full p-2 border rounded-md"
+                      placeholder="Your message..."
+                    />
+                  </div>
+                  <Button className="w-full">Send Message</Button>
+                </form>
+              </CardContent>
+            </Card>
+          </section>
+        )}
       </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
+
+      <footer className="bg-muted mt-12 py-6 text-center">
+        <Footer />
       </footer>
     </div>
   );
