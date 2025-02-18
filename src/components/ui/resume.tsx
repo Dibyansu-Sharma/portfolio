@@ -3,7 +3,14 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Mail, Linkedin, Github, Calendar, MapPin, Award, Book, Code } from "lucide-react";
+const filepath: string = "public\DIBYANSU_SHARMA_RESUME.pdf";
 
+const handleDownloadResume = (filePath:string) => {
+    const link = document.createElement("a");
+    link.href = filePath;
+    link.download = filePath.split("/").pop() || "file.pdf";  // Extracts file name from path
+    link.click();
+}
 const ResumeComponent = () => {
   return (
     <div className="container mx-auto px-4 py-8">
@@ -38,7 +45,7 @@ const ResumeComponent = () => {
                 <span className="text-sm">India</span>
               </div>
               <div className="flex items-center space-x-2">
-                <Button variant="outline" size="sm" className="mt-2">
+                <Button variant="outline" size="sm" className="mt-2" onClick={() => handleDownloadResume(filepath)}>
                   Download Resume
                 </Button>
               </div>

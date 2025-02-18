@@ -1,6 +1,8 @@
+// app/layout.tsx
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import ThemeWrapper from "@/components/ui/theme-wrapper"; // Import the client-only theme wrapper
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -27,7 +29,9 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
+        <ThemeWrapper>
+          {children} {/* ThemeProvider will now be wrapped around the children */}
+        </ThemeWrapper>
       </body>
     </html>
   );
