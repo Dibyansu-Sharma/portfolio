@@ -3,7 +3,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Mail, Linkedin, Github, Calendar, MapPin, Award, Book, Code } from "lucide-react";
-const filepath: string = "public\DIBYANSU_SHARMA_RESUME.pdf";
+const filepath: string = "https://raw.githubusercontent.com/Dibyansu-Sharma/portfolio/d4ec7d75e46e550fcd8a1b777f678718adff9d5f/public/DIBYANSU_SHARMA_RESUME.pdf";
+
 
 const handleDownloadResume = (filePath:string) => {
     const link = document.createElement("a");
