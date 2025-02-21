@@ -24,6 +24,7 @@ import {
 import { Github, Linkedin, Mail, Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
 import Contact from "@/components/ui/contact";
+import Game from "@/components/game";
 
 export default function Portfolio() {
   const [activeSection, setActiveSection] = useState("about");
@@ -229,28 +230,38 @@ export default function Portfolio() {
             >
               <h3 className="text-2xl font-semibold mb-4">Projects</h3>
               <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-                {[1, 2, 3].map((project) => (
-                  <Card key={project}>
-                    <CardHeader>
-                      <CardTitle>Project {project}</CardTitle>
-                      <CardDescription>
-                        A brief description of the project
-                      </CardDescription>
-                    </CardHeader>
-                    <CardContent>
-                      <img
-                        src={`/placeholder.svg?height=200&width=400&text=Project+${project}`}
-                        alt={`Project ${project}`}
-                        className="w-full h-40 object-cover rounded-md"
-                      />
-                    </CardContent>
-                    <CardFooter>
-                      <Button variant="outline" className="w-full">
-                        View Project
-                      </Button>
-                    </CardFooter>
-                  </Card>
-                ))}
+                {[1, 2, 3].map((project) =>
+                  project === 1 ? (
+                    <Card
+                      key={project}
+                      className="flex flex-col items-center p-4"
+                    >
+                      <h4 className="text-lg font-semibold">Tic-Tac-Toe</h4>
+                      <Game />
+                    </Card>
+                  ) : (
+                    <Card key={project}>
+                      <CardHeader>
+                        <CardTitle>Project {project}</CardTitle>
+                        <CardDescription>
+                          A brief description of the project
+                        </CardDescription>
+                      </CardHeader>
+                      <CardContent>
+                        <img
+                          src={`/placeholder.svg?height=200&width=400&text=Project+${project}`}
+                          alt={`Project ${project}`}
+                          className="w-full h-40 object-cover rounded-md"
+                        />
+                      </CardContent>
+                      <CardFooter>
+                        <Button variant="outline" className="w-full">
+                          View Project
+                        </Button>
+                      </CardFooter>
+                    </Card>
+                  )
+                )}
               </div>
             </motion.section>
           )}
