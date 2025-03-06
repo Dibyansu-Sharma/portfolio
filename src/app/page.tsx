@@ -230,38 +230,63 @@ export default function Portfolio() {
             >
               <h3 className="text-2xl font-semibold mb-4">Projects</h3>
               <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-                {[1, 2, 3].map((project) =>
-                  project === 1 ? (
-                    <Card
-                      key={project}
-                      className="flex flex-col items-center p-4"
-                    >
-                      <h4 className="text-lg font-semibold">Tic-Tac-Toe</h4>
-                      <Game />
-                    </Card>
-                  ) : (
-                    <Card key={project}>
-                      <CardHeader>
-                        <CardTitle>Project {project}</CardTitle>
-                        <CardDescription>
-                          A brief description of the project
-                        </CardDescription>
-                      </CardHeader>
-                      <CardContent>
-                        <img
-                          src={`/placeholder.svg?height=200&width=400&text=Project+${project}`}
-                          alt={`Project ${project}`}
-                          className="w-full h-40 object-cover rounded-md"
-                        />
-                      </CardContent>
-                      <CardFooter>
-                        <Button variant="outline" className="w-full">
-                          View Project
-                        </Button>
-                      </CardFooter>
-                    </Card>
-                  )
-                )}
+                {/* Tic-Tac-Toe Game */}
+                <Card className="flex flex-col items-center p-4">
+                  <h4 className="text-lg font-semibold">Tic-Tac-Toe</h4>
+                  <Game />
+                </Card>
+
+                {/* CoSpaceAI Project */}
+                <Card className="flex flex-col items-center p-4">
+                  <CardHeader>
+                    <CardTitle>CoSpaceAI</CardTitle>
+                    <CardDescription>
+                      AI-powered code generation tool for building React applications.
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <Image
+                      src="/cospaceai-preview.png"
+                      width={400}
+                      height={200}
+                      alt="CoSpaceAI Preview"
+                      className="w-full h-40 object-cover rounded-md"
+                    />
+                  </CardContent>
+                  <CardFooter>
+                    <Button variant="outline" className="w-full">
+                      <a href="https://cospaceai.vercel.app/" target="_blank">
+                        View Project
+                      </a>
+                    </Button>
+                  </CardFooter>
+                </Card>
+
+                {/* Placeholder for Other Projects */}
+                {[1, 2].map((project) => (
+                  <Card key={project}>
+                    <CardHeader>
+                      <CardTitle>Project {project + 1}</CardTitle>
+                      <CardDescription>
+                        A brief description of the project.
+                      </CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                      <img
+                        src={`/placeholder.svg?height=200&width=400&text=Project+${
+                          project + 1
+                        }`}
+                        alt={`Project ${project + 1}`}
+                        className="w-full h-40 object-cover rounded-md"
+                      />
+                    </CardContent>
+                    <CardFooter>
+                      <Button variant="outline" className="w-full">
+                        Building...
+                      </Button>
+                    </CardFooter>
+                  </Card>
+                ))}
               </div>
             </motion.section>
           )}
